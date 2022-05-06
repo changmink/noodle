@@ -7,6 +7,113 @@
     <title>Noodle</title>
 </head>
 <body>
-    
+    <table>
+        <tr>
+            <td><input id="a0" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b0" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c0" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d0" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e0" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+        <tr>
+            <td><input id="a1" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b1" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c1" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d1" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e1" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+        <tr>
+            <td><input id="a2" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b2" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c2" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d2" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e2" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+        <tr>
+            <td><input id="a3" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b3" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c3" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d3" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e3" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+        <tr>
+            <td><input id="a4" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b4" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c4" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d4" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e4" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+        <tr>
+            <td><input id="a5" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="b5" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="c5" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="d5" maxlength="1" minlength="1" type="text"></td>
+            <td><input id="e5x" maxlength="1" minlength="1" type="text"></td>
+        </tr>
+    </table>
+
+    <button id="check">check</button>
 </body>
+<script>
+    const isContain = function(word, value) {
+        for (let i = 0; i < word.length; i++) {
+            if (word[i] == value) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+
+    const answer = ["ㅁㅣㅇㅕㄴ", "ㄹㅏㅁㅕㄴ"];
+    let answerNumber = 0;
+    let lineNumber = 0;
+    
+    const checkButton = document.getElementById("check");
+    checkButton.addEventListener("click", function(){
+        let a = document.getElementById("a" + lineNumber);
+        let b = document.getElementById("b" + lineNumber);
+        let c = document.getElementById("c" + lineNumber);
+        let d = document.getElementById("d" + lineNumber);
+        let e = document.getElementById("e" + lineNumber);
+        
+        if (0 == a.value.length || 0 == b.value.length || 0 == c.value.length
+            || 0 == d.value.length  || 0 == e.value.length ) {
+            alert("빈칸을 입력하세요.");
+            return;
+        }
+
+        let score = 0;
+        const answerWord = answer[answerNumber];
+
+        const checkAnswer = function(word, input, number) {
+            input.disabled = true;
+            const value = input.value;
+            if (value == word[number]) {
+                input.style.backgroundColor = 'Green';
+                score++;
+            } else if (isContain(word, value)) {
+                input.style.backgroundColor = 'Yellow';
+            } else {
+                input.style.backgroundColor = 'Gray';
+            }
+        }
+
+        checkAnswer(answerWord, a, 0);
+        checkAnswer(answerWord, b, 1);
+        checkAnswer(answerWord, c, 2);
+        checkAnswer(answerWord, d, 3);
+        checkAnswer(answerWord, e, 4);
+
+        if (5 == score) {
+            alert("클리어!");
+        } else if (lineNumber > 4){
+            alert("실패!");
+        } else {
+            alert("오답!");
+            lineNumber++;
+        }
+
+    });
+</script>
 </html>
